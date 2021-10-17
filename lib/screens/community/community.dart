@@ -223,28 +223,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
               }
             ),
           )
-          // Expanded(
-          //   child: GridView.count(
-          //     primary: false,
-          //     padding: const EdgeInsets.all(20),
-          //     crossAxisSpacing: 10,
-          //     mainAxisSpacing: 10,
-          //     crossAxisCount: 2,
-          //     children: <Widget>[
-          //       ...hits.map((e) => GestureDetector(
-          //         onTap: () {
-          //           Navigator.push(context, MaterialPageRoute(builder: (_) => CommunityPage(community: e)));
-          //         },
-          //         child: GridContainer(
-          //           color: e.color, 
-          //           title: e.title, 
-          //           population: e.population, 
-          //           assetLocation: e.banner
-          //         ),
-          //       ))
-          //     ],
-          //   ),
-          // )
         ],
       )
     );
