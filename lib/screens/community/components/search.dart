@@ -28,7 +28,7 @@ class _SearchContainerState extends State<SearchContainer> {
     final Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width * .95,
-      height: 55,
+      padding: EdgeInsets.all(5),
       margin: EdgeInsets.only(bottom: 10),
       child: TextFormField(
         controller: fieldText,
@@ -39,29 +39,28 @@ class _SearchContainerState extends State<SearchContainer> {
           if (val.isNotEmpty) setState(() => showClearIcon = true);
         },
         // controller: fieldText,
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.never,
           // TODO: Animated Icon
           suffixIcon: showClearIcon
               ? IconButton(
                   icon: Icon(Icons.clear,
-                      color: Colors.black,
+                      color: Colors.white,
                   ),
                   onPressed: () {
                     clearText();
                   })
               : SizedBox.shrink(),
           prefixIcon: Icon(Icons.search,
-              color: Colors.black,
+              color: Colors.white,
           ),
           hintText: 'Search a community',
           hintStyle: TextStyle(
-              color: Colors.grey[850],
+              color: Colors.grey[650],
               fontStyle: FontStyle.normal),
           labelStyle: TextStyle(
-              color: Colors.black,
-              fontFamily: 'Brown',
+              color: Colors.white,
               fontStyle: FontStyle.normal),
           enabledBorder: OutlineInputBorder(
             borderRadius:
@@ -79,7 +78,7 @@ class _SearchContainerState extends State<SearchContainer> {
               width: 0.0,
             ),
           ),
-          fillColor: const Color.fromRGBO(118, 118, 128, 0.24),
+          fillColor: const Color.fromRGBO(118, 118, 128, 0.44),
           filled: true,
         ),
       ),

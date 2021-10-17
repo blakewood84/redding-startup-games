@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:test/main_tabbar/main_tabbar.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,9 +13,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(Duration(seconds: 6)).then((value) => 
-      Navigator.push(context, MaterialPageRoute(builder: (_) => MainTabbar()))
+    Future.delayed(Duration(seconds: 4)).then((value) => 
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MainTabbar()))
     );
   }
 
@@ -30,30 +28,17 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        child: Stack(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: size.width,
-              height: size.height,
-              child: Image.asset('assets/splash.jpg'),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'The Hunting App',
-                  style: GoogleFonts.imFellEnglish(
-                    textStyle: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white
-                    )
-                  )
-                )
-              ],
+              width: size.width * .8,
+              height: size.width * .7,
+              child: Image.asset('assets/logo_white.png'),
             )
           ],
-        ),
+        )
       )
     );
   }

@@ -24,21 +24,6 @@ class _MainTabbarState extends State<MainTabbar> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          SizedBox(width: 55)
-        ],
-        leading: SizedBox(width: 55),
-        title: Center(
-          child: Text(
-            'Hunting App',
-            style: TextStyle(
-              color: Colors.black
-            ),
-          ),
-        ),
-        backgroundColor: Colors.white
-      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,

@@ -26,14 +26,14 @@ class GridContainer extends StatelessWidget {
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              padding: EdgeInsets.only(top: 10, bottom: 10),
+              padding: EdgeInsets.only(top: 5, bottom: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     this.title,
-                    style: GoogleFonts.aBeeZee(
-                      fontSize: 18
+                    style: TextStyle(
+                      fontSize: 16
                     )
                   ),
                   Container(
@@ -47,9 +47,9 @@ class GridContainer extends StatelessWidget {
                               Icon(Icons.people),
                               Text(
                                 '${this.population}',
-                                style: GoogleFonts.aBeeZee(
+                                style: TextStyle(
                                   fontSize: 16
-                                ),
+                                )
                               )
                             ],
                           )

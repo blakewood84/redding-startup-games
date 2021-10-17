@@ -25,6 +25,12 @@ flutter:
   assets:
     - assets/
     - assets/communities/
+    - assets/feed_photos/
+    - assets/learn/
+    - assets/learn/
+    howto/
+    - assets/learn/gear/
+    - assets/learn/animals/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test/global_components/background.dart';
 import 'package:test/providers/community_provider.dart';
-import 'package:test/screens/community/components/community_page.dart';
-import 'package:test/screens/community/components/grid_container.dart';
 import 'package:test/screens/community/components/search.dart';
 
 class CommunityScreen extends StatefulWidget {
@@ -19,6 +16,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
   
   late CommunityProvider? communityProvider;
   List<Community> hits = [];
+  List<Community> originalHits = [];
   String query = '';
 
   @override
@@ -26,7 +24,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
     super.initState();
     communityProvider = Provider.of<CommunityProvider>(context, listen: false);
     hits = communityProvider!.data.map((e) => Community.fromData(e)).toList();
-    print(inspect(hits));
+    originalHits = communityProvider!.data.map((e) => Community.fromData(e)).toList();
   }
 
   void handleSearch(String query) {
@@ -47,8 +45,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
     setState(() {
       hits = newHits;
     });
-    
-    
   }
 
   void clearText() {
@@ -63,9 +59,15 @@ class _CommunityScreenState extends State<CommunityScreen> {
       height: double.infinity,
       child: Column(
         children: [
+          AppBar(
+            title: Text(
+              'Community Forums',
+            ),
+          ),
           Container(
             margin: EdgeInsets.only(
               top: 10,
+              bottom: 0,
             ),
             width: double.infinity,
             child: SearchContainer(
@@ -73,28 +75,176 @@ class _CommunityScreenState extends State<CommunityScreen> {
               handleSearch: handleSearch
             )
           ),
-          Expanded(
-            child: GridView.count(
-              primary: false,
-              padding: const EdgeInsets.all(20),
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              children: <Widget>[
-                ...hits.map((e) => GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => CommunityPage(community: e,)));
-                  },
-                  child: GridContainer(
-                    color: e.color, 
-                    title: e.title, 
-                    population: e.population, 
-                    assetLocation: e.banner
+          Container(
+            margin: EdgeInsets.only(top: 5),
+            width: double.infinity,
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 5
+                ),
+                Text(
+                  'Suggested Channels'
+                ),
+                Expanded(
+                  child: SizedBox(),
+                ),
+                Text(
+                  'See All',
+                  style: TextStyle(
+                    color: Colors.blue
                   ),
-                ))
+                ),
+                SizedBox(
+                  width: 20
+                )
               ],
+            )
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 5, bottom: 5),
+            height: 100,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: originalHits.length,
+              itemBuilder: (_, int index) {
+                return Container(
+                  height: double.infinity,
+                  width: 200,
+                  margin: EdgeInsets.only(left: 5, right: 5),
+                  child: Background(
+                    assetImage: AssetImage(originalHits[index].banner),
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            originalHits[index].title
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.people),
+                              Text(
+                                '${originalHits[index].population}'
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ),
+                  )
+                );
+              }
+            )
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 5),
+            width: double.infinity,
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 5
+                ),
+                Text(
+                  'My Communities'
+                ),
+                Expanded(
+                  child: SizedBox(),
+                ),
+                Text(
+                  'See All',
+                  style: TextStyle(
+                    color: Colors.blue
+                  ),
+                ),
+                SizedBox(
+                  width: 20
+                )
+              ],
+            )
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              scrollDirection: Axis.vertical,
+              itemCount: hits.length,
+              itemBuilder: (_, int index) {
+                return Container(
+                  padding: EdgeInsets.only(left: 10, right: 10, bottom: 5),
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black, 
+                              width: 1
+                          ),
+                        ),
+                        width: 65,
+                        height: 65,
+                        child: Image.asset(hits[index].banner, fit: BoxFit.fill,)
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            hits[index].title
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.people, color: Colors.white,),
+                              Text(
+                                '${hits[index].population}'
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Public Group'
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              }
             ),
           )
+          // Expanded(
+          //   child: GridView.count(
+          //     primary: false,
+          //     padding: const EdgeInsets.all(20),
+          //     crossAxisSpacing: 10,
+          //     mainAxisSpacing: 10,
+          //     crossAxisCount: 2,
+          //     children: <Widget>[
+          //       ...hits.map((e) => GestureDetector(
+          //         onTap: () {
+          //           Navigator.push(context, MaterialPageRoute(builder: (_) => CommunityPage(community: e)));
+          //         },
+          //         child: GridContainer(
+          //           color: e.color, 
+          //           title: e.title, 
+          //           population: e.population, 
+          //           assetLocation: e.banner
+          //         ),
+          //       ))
+          //     ],
+          //   ),
+          // )
         ],
       )
     );

@@ -13,8 +13,26 @@ class _CommunityPageState extends State<CommunityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(),
+      appBar: AppBar(
+        leading: SizedBox(width: 55),
+        actions: [
+          SizedBox(width: 55)
+        ],
+        title: Center(
+          child: Text(
+            this.widget.community.title,
+          )
+        ),
+      ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          children: [
+            
+          ],
+        )
+      ),
     );
   }
 }
